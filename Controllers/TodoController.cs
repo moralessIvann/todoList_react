@@ -9,10 +9,18 @@ namespace todoList_react.Controllers
     public class TodoController : ControllerBase
     {
         private readonly TodoListContext _dbcontext;
-
         public TodoController(TodoListContext dbContext)
         {
             _dbcontext = dbContext;
         }
+        
+
+        
+        /*[HttpGet]
+        [Route("List")]
+        public async Task<IActionResult> List()
+        {
+            List<Task> list = _dbcontext.Ta
+        }*/
     }
 }
