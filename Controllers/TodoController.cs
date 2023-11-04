@@ -15,7 +15,7 @@ namespace todoList_react.Controllers
         }
         
         [HttpGet]
-        [Route("List")] //route es para poder llamar el metodo?
+        [Route("GetList")] //route es para poder llamar el metodo?
         public async Task<IActionResult> GetList()
         {
             List<Models.Task> list = _dbcontext.Tasks.OrderByDescending(t => t.IdTask).ThenBy(t => t.CreationDate).ToList();
@@ -31,11 +31,11 @@ namespace todoList_react.Controllers
             return StatusCode(StatusCodes.Status200OK, "ok");
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Close/{id:int}")]
         public async Task<IActionResult> Close(int id)
         {
-            Models.Task task = _dbcontext.Tasks.Find(id);
+            Models.Task task = _dbcontext.Tasks.Where(t => t.IdTask == id).FirstOrDefault();
             _dbcontext.Tasks.Remove(task);
             await _dbcontext.SaveChangesAsync();
 
